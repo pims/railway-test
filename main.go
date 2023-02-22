@@ -8,12 +8,13 @@ import (
 )
 
 func main() {
+	addr := fmt.Sprintf(":%s", os.Getenv("PORT"))
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Fprint(w, "hello world")
+		fmt.Fprintf(w, "hello world from: %s", addr)
 	})
 
-	addr := fmt.Sprintf(":%s", os.Getenv("PORT"))
 	fmt.Println("listening on", addr)
 	if err := http.ListenAndServe(addr, mux); err != nil {
 		log.Fatal(err)
