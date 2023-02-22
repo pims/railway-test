@@ -13,6 +13,9 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		fmt.Fprintf(w, "hello world from: %s", addr)
+		for _, kv := range os.Environ() {
+			fmt.Fprintf(w, "%s", kv)
+		}
 	})
 
 	fmt.Println("listening on", addr)
